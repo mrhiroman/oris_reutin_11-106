@@ -1,0 +1,169 @@
+.overlay {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+    background: rgba( 0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 25;
+}
+
+header {
+    width: 100%;
+    background: #171a21;
+    color: #E9E9E9;
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.header-compact {
+    display: none;
+    padding: 13px 8px;
+}
+
+.burger-button-label {
+    display: none;
+    position: absolute;
+    left: 8px;
+    top: 9px;
+    cursor: pointer;
+    width: 36px;
+    height: 31px;
+    z-index: 2;
+}
+
+.burger-image {
+    width: 36px;
+    height: 31px;
+}
+
+.burger-button {
+    display: none;
+}
+
+input:checked ~ .side-menu {
+    left: 0;
+}
+
+input:checked ~ body {
+    overflow: hidden;
+}
+
+input:checked ~ .overlay {
+    visibility: visible;
+    opacity: 1.0;
+}
+
+input:checked ~ .burger-image {
+    display: none;
+}
+
+input:checked ~ .burger-button-label {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 29;
+}
+
+.steam-logo-compact {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: inline-block;
+    height: 36px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.header-content {
+    position: relative;
+    width: 940px;
+    height: 104px;
+    margin: 0px auto;
+    display: block;
+}
+
+.steam-logo {
+    float: left;
+    padding-top: 30px;
+    margin-right: 40px;
+    width: 176px;
+    height: 44px;
+}
+
+header nav {
+    position: absolute;
+    left: 200px;
+}
+
+header nav a {
+    display: block;
+    position: relative;
+    padding-top: 45px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 7px;
+    line-height: 16px;
+    float: left;
+    font-size: 14px;
+    color: #b8b6b4;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.header-tips {
+    position: absolute;
+    right: 0px;
+    top: 6px;
+    height: 24px;
+    line-height: 24px;
+    color: #b8b6b4;
+    font-size: 11px;
+}
+
+.install-button {
+    vertical-align: top;
+    display: inline-block;
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+    margin-right: 3px;
+    display: inline-block;
+    padding-left: 35px;
+    padding-right: 9px;
+    background-position: 10px 5px;
+    background-image: url(https://store.cloudflare.steamstatic.com/public/shared/images/header/btn_header_installsteam_download.png?v=1);
+    background-color: #5c7e10;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    color: #e5e4dc;
+    cursor: pointer;
+}
+
+.header-tips a {
+    padding: 0px 4px;
+    text-decoration: none;
+    color: #b8b6b4;
+    cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .header-content {
+        display: none;
+    }
+
+    .header-compact {
+        display: block;
+    }
+
+    .burger-button-label {
+        display: block;
+    }
+}
