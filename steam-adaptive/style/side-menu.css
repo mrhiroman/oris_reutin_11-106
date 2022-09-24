@@ -1,5 +1,5 @@
 .side-menu {
-    box-shadow: 0 0 7px 0 rgb(0 0 0 / 75%);
+    box-shadow: none;
     transition: left 0.5s, right 0.5s;
     position: fixed;
     top: 0;

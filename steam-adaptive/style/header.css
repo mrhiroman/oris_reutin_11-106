@@ -24,17 +24,19 @@ header {
 .header-compact {
     display: none;
     padding: 13px 8px;
+    background-color: #171a21;
+    z-index: 2;
 }
 
 .burger-button-label {
     display: none;
-    position: absolute;
+    position: fixed;
     left: 8px;
     top: 9px;
     cursor: pointer;
     width: 36px;
     height: 31px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .burger-image {
@@ -48,6 +50,7 @@ header {
 
 input:checked ~ .side-menu {
     left: 0;
+    box-shadow: 0 0 7px 0 rgb(0 0 0 / 75%);
 }
 
 input:checked ~ body {
@@ -65,7 +68,8 @@ input:checked ~ .burger-image {
 
 input:checked ~ .burger-button-label {
     position: absolute;
-    height: 100%;
+    cursor: default;
+    height: 200%;
     width: 100%;
     z-index: 29;
 }
@@ -161,6 +165,9 @@ header nav a {
 
     .header-compact {
         display: block;
+        position: fixed;
+        top: 0;
+        width: 100%;
     }
 
     .burger-button-label {
