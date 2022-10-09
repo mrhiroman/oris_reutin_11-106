@@ -1,0 +1,8 @@
+﻿namespace NetConsoleApp
+{
+    public class ServerSetting
+    {
+        public int Port { get; set; } = 4800;
+        public string Site { get; set; } = @"./site";
+    }
+}

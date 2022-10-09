@@ -1,0 +1,13 @@
+C:\Users\sreut\RiderProjects\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.exe
+C:\Users\sreut\RiderProjects\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.deps.json
+C:\Users\sreut\RiderProjects\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.runtimeconfig.json
+C:\Users\sreut\RiderProjects\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.runtimeconfig.dev.json
+C:\Users\sreut\RiderProjects\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.dll
+C:\Users\sreut\RiderProjects\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.pdb
+C:\Users\sreut\RiderProjects\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.csprojAssemblyReference.cache
+C:\Users\sreut\RiderProjects\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.AssemblyInfoInputs.cache
+C:\Users\sreut\RiderProjects\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.AssemblyInfo.cs
+C:\Users\sreut\RiderProjects\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.csproj.CoreCompileInputs.cache
+C:\Users\sreut\RiderProjects\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.dll
+C:\Users\sreut\RiderProjects\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.pdb
+C:\Users\sreut\RiderProjects\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.genruntimeconfig.cache
