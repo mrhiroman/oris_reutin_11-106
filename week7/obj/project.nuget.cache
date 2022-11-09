@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "irZDgC7VckKpevE+j8DRGDpSvO3fwJXVIRkEh2dkUEVCz9CTVI9q+2zLhW48xuH+9XmQfhlYwIJWiwzWk7Hbrw==",
+  "dgSpecHash": "G0rDiK/NJKHBEXxKxgIj/Bkw9apQLrfUl7lywhHko74Jyy+tJTOcRsjbPWAsRHtAIZX7ZgidEXh9OCkICDFhlA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sreut\\RiderProjects\\HttpServer\\HttpServer.csproj",
+  "projectFilePath": "C:\\Users\\sreut\\Desktop\\homework\\oris_reutin_11-106\\week7\\HttpServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sreut\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\sreut\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

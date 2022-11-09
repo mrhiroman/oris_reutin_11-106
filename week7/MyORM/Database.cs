@@ -93,18 +93,23 @@ namespace MyORM
         public IEnumerable<T> Select<T>()
         {
             string t = typeof(T).Name;
-            string query = $"SELECT * FROM {t}s";
+            string query = $"SELECT * FROM {t.ToString().Split(".")[^1]}s";
             return ExecuteQuery<T>(query);
         }
 
         public int Insert<T>(T obj)
         {
             Type t = typeof(T);
-            string query = $"INSERT INTO {t}s VALUES(";
+            string query = $"INSERT INTO {t.ToString().Split(".")[^1]}s VALUES(";
             t.GetProperties().ToList().ForEach(p =>
             {
-                AddParameter(p.Name, obj.GetType().GetField(p.Name)?.GetValue(obj));
-                query += "@" + p.Name + ",";
+                var value = p.GetValue(obj);
+                if (p.Name != "Id")
+                {
+                    AddParameter(p.Name, value);
+                    query += "@" + p.Name + ",";
+                    Console.WriteLine(this._command.Parameters);
+                }
             });
             return ExecuteNonQuery(query[..^1] + ")");
         }

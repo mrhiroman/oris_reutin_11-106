@@ -127,8 +127,10 @@ namespace HttpServer
                                     .Skip(2)
                                     .Select(s => s.Replace("/", ""))
                                     .ToArray();
+            
+            var controllerInfo = strParams.ToList().ToArray();
 
-            if (strParams.Length == 0 && request.HttpMethod == "POST")
+            if (strParams.Length < 2 && request.HttpMethod == "POST")
             {
                 Stream body = request.InputStream;
                 Encoding encoding = request.ContentEncoding;
@@ -154,9 +156,14 @@ namespace HttpServer
             if (controller == null) return false;
 
             var test = typeof(HttpController).Name;
+            foreach (var meth in controller.GetMethods())
+            {
+                Console.WriteLine(meth.Name);
+            }
             var method = controller.GetMethods()
                 .FirstOrDefault(t => t.GetCustomAttributes(true)
-                    .Any(attr => attr.GetType().Name == $"Http{_httpContext.Request.HttpMethod}") && t.GetParameters().Length == strParams.Length);
+                    .Any(attr => attr.GetType().Name == $"Http{_httpContext.Request.HttpMethod}") && t.GetParameters().Length == strParams.Length 
+                        && (controllerInfo.Length == 0 || t.Name.ToLower() == controllerInfo[^1] || controllerInfo[^1] == controllerName));
 
             if (method == null) return false;
             
