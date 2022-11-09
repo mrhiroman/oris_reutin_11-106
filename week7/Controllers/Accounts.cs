@@ -34,13 +34,13 @@ namespace HttpServer.Controllers
         }
 
         [HttpPOST("login")]
-        public bool Login(string login, string pass)
+        public string Login(string login, string pass)
         {
             var db = new Database(_connectionString);
             string query = $"SELECT * FROM Accounts WHERE Login='{login}' AND Password='{pass}'";
             var list = db.ExecuteQuery<Account>(query);
-            if (list.Count() == 0) return false;
-            return true;
+            if (list.Count() != 0) return $"auth_cookie:{list.ToList()[0].Id}";
+            return "Not found";
         }
     }
 }

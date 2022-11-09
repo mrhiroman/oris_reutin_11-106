@@ -208,6 +208,18 @@ namespace HttpServer
                     return true;
                 }
             }
+
+            if (ret != null && ret.ToString().Split(':')[0] == "auth_cookie")
+            {
+                using (response)
+                {
+                    var value = "{isAuthorized=true,id=" + ret.ToString().Split(':')[^1] + "}";
+                    var cookie = new Cookie("SessionId", value);
+                    response.Cookies.Add(cookie);
+
+                    return true;
+                }
+            }
             
             response.ContentType = "Application/json";
 
