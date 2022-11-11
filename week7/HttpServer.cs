@@ -213,12 +213,22 @@ namespace HttpServer
             {
                 using (response)
                 {
-                    var value = "{isAuthorized=true,id=" + ret.ToString().Split(':')[^1] + "}";
+                    var value = JsonSerializer.Serialize(new AuthCookie { isAuthorized = true, id = Convert.ToInt32(ret.ToString().Split(':')[^1]) }).Replace(',','.');
                     var cookie = new Cookie("SessionId", value);
                     response.Cookies.Add(cookie);
 
                     return true;
                 }
+            }
+            
+            if(method.GetCustomAttributes().Any(a => a.GetType().Name == "RequireAuth"))
+            {
+                if (!ValidAuthCookie())
+                {
+                    ret = "";
+                    response.StatusCode = (int) HttpStatusCode.Unauthorized;
+                }
+                
             }
             
             response.ContentType = "Application/json";
@@ -232,6 +242,15 @@ namespace HttpServer
             output.Close();
             
             return true;
+
+            bool ValidAuthCookie()
+            {
+                if (request.Cookies["SessionId"] == null) return false;
+                var cookieValue = request.Cookies["SessionId"].Value.Replace('.',',');
+                var status = JsonSerializer.Deserialize<AuthCookie>(cookieValue);
+                if (status.isAuthorized) return true;
+                return false;
+            }
         }
         
         private string GetExtension(string url)

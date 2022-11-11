@@ -15,6 +15,7 @@ namespace HttpServer.Controllers
         string _connectionString =
             @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SteamDB;Integrated Security=True";
 
+        [RequireAuth]
         [HttpGET("list")]
         public List<Account> GetAccounts()
         {
