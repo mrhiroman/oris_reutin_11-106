@@ -162,22 +162,25 @@ namespace HttpServer
             }
             var method = controller.GetMethods()
                 .FirstOrDefault(t => t.GetCustomAttributes(true)
-                    .Any(attr => attr.GetType().Name == $"Http{_httpContext.Request.HttpMethod}") && t.GetParameters().Length == strParams.Length 
-                        && (controllerInfo.Length == 0 || t.Name.ToLower() == controllerInfo[^1] || controllerInfo[^1] == controllerName));
+                    .Any(attr => (attr.GetType().Name == $"Http{_httpContext.Request.HttpMethod}") && 
+                                     ((t.GetParameters().Length - 1 == strParams.Length && request.HttpMethod == "POST") || (t.GetParameters().Length - 1 == strParams.Length - 1 && request.HttpMethod == "GET")) 
+                                     && (controllerInfo.Length == 0 || t.Name.ToLower() == controllerInfo[^1] || controllerInfo[^1] == controllerName)));
 
             if (method == null) return false;
             
             object? ret;
 
-            if (strParams.Length == method.GetParameters().Length)
+            if ((strParams.Length == method.GetParameters().Length - 1 && request.HttpMethod == "POST")  ||
+                (strParams.Length - 1 == method.GetParameters().Length - 1 && request.HttpMethod == "GET"))
             {
                 List<object> queryParams = new List<object>();
+                queryParams.Add(_httpContext);
                 bool BadRequest = false;
                 try
                 {
-                    queryParams = method.GetParameters()
+                    queryParams.AddRange(method.GetParameters().Skip(1)
                         .Select((p, i) => Convert.ChangeType(strParams[i], p.ParameterType))
-                        .ToList();
+                        .ToList());
                 }
                 catch (FormatException)
                 {

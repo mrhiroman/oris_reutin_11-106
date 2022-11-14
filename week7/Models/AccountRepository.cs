@@ -23,7 +23,7 @@ namespace HttpServer
         public Account GetById(int id)
         {
             var db = new Database(_connectionString);
-            var acc = db.ExecuteQuery<Account>("SELECT * FROM Accounts WHERE Id={id}");
+            var acc = db.ExecuteQuery<Account>($"SELECT * FROM Accounts WHERE Id={id}");
             if (acc.ToList()[0] != null)
             {
                 return acc.ToList()[0];
