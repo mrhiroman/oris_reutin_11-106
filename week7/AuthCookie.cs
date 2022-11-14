@@ -1,8 +1,10 @@
-﻿namespace HttpServer
+﻿using System;
+
+namespace HttpServer
 {
+    
     public class AuthCookie
     {
-        public bool isAuthorized { get; set; }
-        public int id { get; set; }
+        public string Id { get; set; }
     }
 }

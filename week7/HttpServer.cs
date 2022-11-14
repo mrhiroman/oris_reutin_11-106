@@ -216,7 +216,26 @@ namespace HttpServer
             {
                 using (response)
                 {
-                    var value = JsonSerializer.Serialize(new AuthCookie { isAuthorized = true, id = Convert.ToInt32(ret.ToString().Split(':')[^1]) }).Replace(',','.');
+                    var userParams = ret.ToString().Split(':');
+                    string session = "";
+                    if (request.Cookies["SessionId"] != null)
+                    {
+                        var id = JsonSerializer.Deserialize<AuthCookie>(request.Cookies["SessionId"].Value).Id;
+                        if (SessionManager.ValidateSession(id))
+                        {
+                            session = SessionManager.UpdateSession(id);
+                        }
+                        else
+                        {
+                            session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2]);
+                        }
+                    }
+                    else
+                    {
+                        session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2]);
+                    }
+                    
+                    var value = JsonSerializer.Serialize(new AuthCookie { Id = session});
                     var cookie = new Cookie("SessionId", value);
                     response.Cookies.Add(cookie);
 
@@ -251,7 +270,7 @@ namespace HttpServer
                 if (request.Cookies["SessionId"] == null) return false;
                 var cookieValue = request.Cookies["SessionId"].Value.Replace('.',',');
                 var status = JsonSerializer.Deserialize<AuthCookie>(cookieValue);
-                if (status.isAuthorized) return true;
+                if (SessionManager.ValidateSession(status.Id)) return true;
                 return false;
             }
         }

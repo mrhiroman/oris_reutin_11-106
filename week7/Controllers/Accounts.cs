@@ -42,7 +42,7 @@ namespace HttpServer.Controllers
             var db = new Database(_connectionString);
             string query = $"SELECT * FROM Accounts WHERE Login='{login}' AND Password='{pass}'";
             var list = db.ExecuteQuery<Account>(query);
-            if (list.Count() != 0) return $"auth_cookie:{list.ToList()[0].Id}";
+            if (list.Count() != 0) return $"auth_cookie:{list.ToList()[0].Id}:{list.ToList()[0].Login}";
             return "Not found";
         }
 
@@ -51,7 +51,8 @@ namespace HttpServer.Controllers
         public Account MyAccount(HttpListenerContext context)
         {
             var cookie = JsonSerializer.Deserialize<AuthCookie>(context.Request.Cookies["SessionId"]?.Value.Replace('.',','));
-            return GetAccountById(context, cookie.id);
+            var session = SessionManager.GetInformation(cookie.Id);
+            return GetAccountById(context, session.AccountId);
         }
     }
 }

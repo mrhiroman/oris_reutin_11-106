@@ -5,31 +5,38 @@ namespace HttpServer
 {
     public class SessionManager
     {
-        ObjectCache _cache = MemoryCache.Default;
+        static MemoryCache _cache = MemoryCache.Default;
         
-        public void CreateSession(int accountId, string login)
+        public static string CreateSession(int accountId, string login)
         {
             var session = new Session(Guid.NewGuid(), accountId, login);
             _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(2));
+            var s = _cache.Get(session.Id.ToString());
+            Console.WriteLine(session.Id.ToString());
+            return session.Id.ToString();
         }
 
-        public bool ValidateSession(int sessionId)
+        public static bool ValidateSession(string sessionId)
         {
+            Console.WriteLine(_cache.GetCount());
             var session = GetInformation(sessionId);
-            if (DateTime.Now - TimeSpan.FromMinutes(15) >= session.CreateDateTime) return true;
+            if (session == null) return false;
+            if (DateTime.Now - TimeSpan.FromMinutes(15) <= session.CreateDateTime) return true;
             return false;
         }
 
-        public Session GetInformation(int sessionId)
+        public static Session GetInformation(string sessionId)
         {
-            var session = _cache.Get(sessionId.ToString());
+            Console.WriteLine(sessionId);
+            var session = _cache.Get(sessionId);
             return (Session)session;
         }
 
-        public void UpdateSession(int sessionId)
+        public static string UpdateSession(string sessionId)
         {
             var session = GetInformation(sessionId);
             if(ValidateSession(sessionId)) _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(2));
+            return sessionId.ToString();
         }
     }
 }
