@@ -1,0 +1,655 @@
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #54afb0 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #29B3CF 0%, #42CFBC 100%);
+    border-radius: 10px;
+  }
+
+
+body { 
+    background-color: #1E1E1E;
+    background-image: url("assets/circles.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.header {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 92px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: "Outfit", sans-serif;
+}
+
+.header__logo {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 36px;
+    color: white;
+    background: #CFCFCF;
+    background: repeating-linear-gradient(to right,#ffffff 0%, #42CFBC 50%, #6db6e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+ 
+}
+
+.header__nav {
+    display: flex;
+    gap: 50px;
+}
+
+.header__nav__link {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+.header__nav__link:hover {
+    opacity: 0.7;
+}
+
+.general {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.general__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 200px;
+    margin-left: 100px;
+}
+
+.general__info__text {
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 76px;
+    color: white;
+    width: 522px;
+    margin-left: 10px;
+}
+
+.general__info__buttons {
+    margin-top: 31px;
+    display: flex;
+    gap: 22px;
+}
+
+.general__info__button {
+    cursor: pointer;
+    width: 256px;
+    height: 95px;
+    background: #23263C;
+    border-radius: 50px;
+    border: 3px solid #66a8a2;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 34px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.general__info__button:hover {
+    opacity: 0.7;
+}
+
+.general__info__button__transparent {
+    background: none;
+}
+
+.general__image {
+    margin-top: 90px;
+    /*margin-left: 100px;*/
+}
+
+.paywith {
+    width: 1070px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 220px;
+}
+
+.paywith__text {
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 38px;
+    color: white;
+    margin-left: 15px;
+}
+
+.paywith__container {
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 1065px;
+    height: 125px;
+    margin-top: 30px;
+}
+
+.paywith__container__text {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 34px;
+    color: white;
+    opacity: 0.5;
+}
+
+.joinus__container {
+    margin: 0 auto;
+    margin-top: 220px;
+    width: 1063px;
+    height: 378px;
+    background: linear-gradient(96.97deg, #1F143B -19.45%, #3C8273 103.56%);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.joinus__container__text {
+    width: 312px;
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    margin-top: 24px;
+}
+
+.joinus__container__button {
+    width: 344px;
+    height: 85px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 60px;
+    color: white;
+    text-align: center;
+    background: black;
+    border-radius: 50px;
+    margin-top: 39px;
+    cursor: pointer;
+}
+
+.joinus__container__button:hover {
+    background: linear-gradient(to right, #29B3CF 0%, #42CFBC 100%);
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10%;
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.footer__col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.footer__col__headline {
+    font-family: 'Outfit',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 32px;
+    color: white;
+}
+
+.footer__col__tab {
+    margin-top: 22px;
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.footer__col__tab:hover {
+    opacity: 1;
+}
+
+.copyright {
+    margin-top: 22px;
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;
+    color: white;
+    opacity: 0.4;
+}
+
+
+/* PROFILE  */
+.profile {
+    display: flex;
+    flex-direction: column;
+    margin-left: 192px;
+    margin-right: 192px;
+    margin-top: 100px;
+} 
+
+.profile__caption {
+    font-family: 'Outfit',sans-serif;
+    align-self: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 32px;
+    color: #42CFBC;
+    margin-top: 50px;
+}
+
+.profile__details {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Outfit',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    color: white;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    border-radius: 20px;
+    height: 100px;
+}
+
+.nft-details {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nft-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nft-container__button {
+    font-family: 'Outfit',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    color: white;
+    padding: 4px 4px;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+.nft-container__button:hover {
+    opacity: 0.7;
+}
+.nft-container__photo {
+    width: 100px;
+    height: 100px;
+}
+
+.details-col {
+    flex-direction: column;
+    height: 300px;
+}
+
+.wallets__button {
+    font-family: 'Outfit',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    padding: 4px 4px;
+    color: white;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+.wallets__button:hover {
+    opacity: 0.7;
+}
+
+/*  404 */
+.notfound-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+}
+
+.notfound-404 {
+    font-family: 'Outfit', sans-serif;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 80px;
+    color: white;
+    background: #CFCFCF;
+    background: repeating-linear-gradient(to right,#ffffff 0%, #42CFBC 50%, #6db6e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.notfound-text {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 80px;
+    color: white;
+}
+
+/*  NFT Info  */
+ .nft-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 100px;
+ }
+
+ .nft-info__text {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 80px;
+    color: white;
+ }
+
+ .nft-info__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Outfit',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    color: white;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    border-radius: 20px;
+    flex-wrap: wrap;
+ }
+
+ .namewithphoto-container {
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+ }
+
+ .ownerinfo-container {
+    margin-right: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+ .sell__input {
+    background: #50b2a0;
+    border-radius: 16px;
+    padding: 8px;
+    width: 150px;
+ }
+
+ .sell__button {
+    font-family: 'Outfit',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    padding: 4px 4px;
+    color: white;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    margin-top: 7px;
+    cursor: pointer;
+ }
+
+ .sell__button:hover {
+    opacity: 0.7;
+ }
+
+ /* Marketplace */
+
+ .nfts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+ }
+
+ .nfts__caption {
+    font-family: 'Outfit',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 32px;
+    color: #42CFBC;
+ }
+
+ .nfts__container {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+ }
+
+ .collection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    min-width: 400px;
+    padding: 30px;
+ }
+
+ .collection__name {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 30px;
+ }
+
+ .collection__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 30px;
+ }
+
+ .collection__nft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+ }
+
+ .collection__nft__photo {
+    width: 100px;
+    height: 100px;
+ }
+
+ .collection__nft__buy {
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    cursor: pointer;
+    padding: 4px;
+ }
+
+ .collection__nft__buy:hover {
+    opacity: 0.7;
+ }
+
+ .collection__load{
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    cursor: pointer;
+    padding: 4px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+
+ }
+
+ .collection__load:hover {
+    opacity: 0.7;
+ }
+
+ /* login page */
+
+ .login {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 100px;
+    flex-wrap: wrap;
+ }
+
+ .login__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+    color: white;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    border-radius: 20px;
+    padding: 30px;
+    gap: 30px;
+ }
+
+ .login__panel__text {
+    font-weight: 700;
+    font-size: 36px;
+ }
+
+ .login__panel__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+ }
+
+ .login__input {
+    text-align: center;
+    background: #347569;
+    border: 2px solid #50b2a0;
+    border-radius: 10px;
+    padding: 4px;
+ }
+
+ .login__button {
+    margin-top: 20px;
+    background: #23263C;
+    border: 3px solid #50b2a0;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 20px;
+ }
+
+ .login__button:hover {
+    opacity: 0.7;
+ }
+
+ /*  About  */ 
+ .about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 50px;
+    font-family: 'Outfit', sans-serif;
+    color: white;
+ }
+
+ .about__caption {
+    font-size: 36px;
+    font-weight: 700;
+ }
+
+ .about__text {
+    font-size: 20px;
+    width: 60%;
+ }
+
+ @media(max-width: 900px) {
+
+    .header {
+        margin-left: 0;
+        margin-right: 0;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+    }
+}

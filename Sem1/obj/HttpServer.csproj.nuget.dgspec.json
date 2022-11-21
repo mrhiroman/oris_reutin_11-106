@@ -39,6 +39,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.4, )"
+            },
+            "System.Runtime.Caching": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
