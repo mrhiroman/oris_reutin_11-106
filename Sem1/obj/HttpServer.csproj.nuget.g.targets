@@ -5,5 +5,6 @@
     <Import Project="$(NuGetPackageRoot)system.security.cryptography.protecteddata\7.0.0\buildTransitive\netcoreapp2.0\System.Security.Cryptography.ProtectedData.targets" Condition="Exists('$(NuGetPackageRoot)system.security.cryptography.protecteddata\7.0.0\buildTransitive\netcoreapp2.0\System.Security.Cryptography.ProtectedData.targets')" />
     <Import Project="$(NuGetPackageRoot)system.configuration.configurationmanager\7.0.0\buildTransitive\netcoreapp2.0\System.Configuration.ConfigurationManager.targets" Condition="Exists('$(NuGetPackageRoot)system.configuration.configurationmanager\7.0.0\buildTransitive\netcoreapp2.0\System.Configuration.ConfigurationManager.targets')" />
     <Import Project="$(NuGetPackageRoot)system.runtime.caching\7.0.0\buildTransitive\netcoreapp2.0\System.Runtime.Caching.targets" Condition="Exists('$(NuGetPackageRoot)system.runtime.caching\7.0.0\buildTransitive\netcoreapp2.0\System.Runtime.Caching.targets')" />
+    <Import Project="$(NuGetPackageRoot)scriban\5.5.1\build\Scriban.targets" Condition="Exists('$(NuGetPackageRoot)scriban\5.5.1\build\Scriban.targets')" />
   </ImportGroup>
 </Project>

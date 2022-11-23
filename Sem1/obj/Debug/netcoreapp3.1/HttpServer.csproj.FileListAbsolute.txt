@@ -76,3 +76,4 @@ C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.dll
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.pdb
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.genruntimeconfig.cache
+C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\bin\Debug\netcoreapp3.1\Scriban.dll

@@ -19,6 +19,10 @@ namespace HttpServer
             }
 
             return result;
+            
+            //return new Guid().ToString();
+            
+            //Тимерхан Аглямович, согласитесь, так было лучше))
         }
 
         public static string GetSHA256(string password)

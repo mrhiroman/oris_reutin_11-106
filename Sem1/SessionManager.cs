@@ -10,7 +10,7 @@ namespace HttpServer
         public static string CreateSession(int accountId, string login)
         {
             var session = new Session(Guid.NewGuid(), accountId, login);
-            _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(2));
+            _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(10));
             var s = _cache.Get(session.Id.ToString());
             Console.WriteLine(session.Id.ToString());
             return session.Id.ToString();
@@ -35,7 +35,7 @@ namespace HttpServer
         public static string UpdateSession(string sessionId)
         {
             var session = GetInformation(sessionId);
-            if(ValidateSession(sessionId)) _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(2));
+            if(ValidateSession(sessionId)) _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(10));
             return sessionId.ToString();
         }
     }

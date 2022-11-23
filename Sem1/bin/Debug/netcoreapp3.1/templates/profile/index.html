@@ -3,8 +3,8 @@
     <head>
         <title>Cryptures</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../reset.css">
-        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="/reset.css">
+        <link rel="stylesheet" href="/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
@@ -23,47 +23,26 @@
             <section class="profile">
                 <div class="profile__caption ">Profile</div>
                 <div class="profile__details">
-                    <div class="profile__details__text">Nickname: {Login}</div>
-                    <div class="profile__details__text">Balance: {Balance}</div>
-                    <div class="profile__details__text">Email: {Email}</div>
+                    <div class="profile__details__text">Nickname: {{Login}}</div>
+                    <div class="profile__details__text">Balance: {{Balance}} $</div>
+                    <div class="profile__details__text">Email: {{Email}}</div>
                 </div>
                 <div class="profile__caption ">My NFTs</div>
                 <div class="profile__details nft-details">
+                    {{- for nft in nfts}}
                     <div class="nft-container">
                         <div class="nft-container__photo">
-                            <img src="" alt="nft">
+                            <img src="/{{nft.ImagePath}}" alt="nft">
                         </div>
-                        <div class="nft-container__name">{Name}</div>
-                        <button class="nft-container__button">Info</button>
+                        <div class="nft-container__name">{{nft.Name}}</div>
+                        <button class="nft-container__button" id="button{{nft.Id}}">Info</button>
                     </div>
-                    <div class="nft-container">
-                        <div class="nft-container__photo">
-                            <img src="" alt="nft">
-                        </div>
-                        <div class="nft-container__name">{Name}</div>
-                        <button class="nft-container__button">Info</button>
-                    </div>
-                    <div class="nft-container">
-                        <div class="nft-container__photo">
-                            <img src="" alt="nft">
-                        </div>
-                        <div class="nft-container__name">{Name}</div>
-                        <button class="nft-container__button">Info</button>
-                    </div>
-                    <div class="nft-container">
-                        <div class="nft-container__photo">
-                            <img src="" alt="nft">
-                        </div>
-                        <div class="nft-container__name">{Name}</div>
-                        <button class="nft-container__button">Info</button>
-                    </div>
-                    <div class="nft-container">
-                        <div class="nft-container__photo">
-                            <img src="" alt="nft">
-                        </div>
-                        <div class="nft-container__name">{Name}</div>
-                        <button class="nft-container__button">Info</button>
-                    </div>
+                    <script>
+                        document.getElementById("button{{nft.Id}}").onclick = function () {
+                            location.href = "/nfts/id/{{nft.Id}}";
+                        };
+                    </script>
+                    {{- end}}
                 </div>
                 <div class="profile__caption ">My Wallets</div>
                 <div class="profile__details details-col">

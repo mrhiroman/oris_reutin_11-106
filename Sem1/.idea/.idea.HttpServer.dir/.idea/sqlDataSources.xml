@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="de286577-bbcc-44d5-a35b-ab1b35d21431" />
+          <option name="name" value="Microsoft SQL Server LocalDB (JetBrains) (DDL)" />
+          <option name="languageId" value="TSQL" />
+          <option name="urls">
+            <array>
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Collections.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Deals.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Nfts.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Users.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Collections.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Deals.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Nfts.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/NftDB/dbo/Users.sql" />
+            </array>
+          </option>
+          <option name="outPath" value="C:\Users\sreut\Documents\dump" />
+          <option name="outLayout" value="File per object by schema and database.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

@@ -7,5 +7,6 @@
         public string Email { get; set; }
         public string Salt { get; set; }
         public string HashedPassword { get; set; }
+        public int Balance { get; set; }
     }
 }

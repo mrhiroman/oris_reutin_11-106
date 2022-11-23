@@ -24,7 +24,7 @@ namespace HttpServer
         {
             var db = new DatabaseAccessUnit(_connectionString);
             var acc = db.ExecuteQuery<User>($"SELECT * FROM Users WHERE Id={id}");
-            if (acc.ToList()[0] != null)
+            if (acc.ToList() != null)
             {
                 return acc.ToList()[0];
             }
@@ -42,7 +42,7 @@ namespace HttpServer
         {
             var db = new DatabaseAccessUnit(_connectionString);
             db.Insert(entity);
-            return "Profile_redirect";
+            return "Success!";
         }
 
         public string Delete(User entity)

@@ -35,16 +35,18 @@ namespace HttpServer.Controllers
         {
             string salt = HashManager.CreateSalt();
             string hashedPassword = HashManager.GetSHA256(salt + pass);
-            return _repository.Insert(new User {Login = login, Email = email, Salt = salt, HashedPassword = hashedPassword});
+            return _repository.Insert(new User {Login = login, Email = email.Replace("%40","@"),
+                Salt = salt, HashedPassword = hashedPassword, Balance = 50});
         }
 
-        [HttpPOST("login")]
-        public string Login(HttpListenerContext context, string login, string pass)
+        [HttpPOST("authorize")]
+        public string Authorize(HttpListenerContext context, string login, string pass)
         {
             var db = new DatabaseAccessUnit(_connectionString);
             
             string saltQuery = $"SELECT * FROM Users WHERE Login='{login}'";
-            string salt = db.ExecuteQuery<User>(saltQuery).ToList()[0].Salt;
+            var saltLst = db.ExecuteQuery<User>(saltQuery).ToList();
+            string salt = saltLst.Count != 0 ? saltLst[0].Salt : null;
             if (salt != null)
             {
                 string hashedPassword = HashManager.GetSHA256(salt + pass);
@@ -54,7 +56,7 @@ namespace HttpServer.Controllers
                 if (list.Count() != 0) return $"auth_cookie:{list.ToList()[0].Id}:{list.ToList()[0].Login}";
             }
             
-            return "Invalid Data";
+            return "Invalid Data"; //TODO add error message and redirect
         }
 
         [RequireAuth]

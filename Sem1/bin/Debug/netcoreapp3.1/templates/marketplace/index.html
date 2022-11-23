@@ -27,130 +27,38 @@
                     <div class="collection">
                         <div class="collection__name">Buy From Users</div>
                         <div class="collection__container">
+                            {{- for nft in sellNfts}}
                             <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
+                                <div class="collection__nft__name">{{nft.Name}}</div>
                                 <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
+                                    <img src="/{{nft.ImagePath}}" class="collection__nft__image" alt="nft">
                                 </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
+                                <div class="collection__nft__price">{{nft.Price}} $</div>
                                 <button class="collection__nft__buy">BUY</button>
                             </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
+                            {{- end}}
                         </div>
                         <button class="collection__load">Load More</button>
                     </div>
 
-                     <!-- Current Deals --> 
-
+                    {{- for collection in Collections}}
                     <div class="collection">
-                        <div class="collection__name">{Collection.Name}</div> 
+                        <div class="collection__name">{{collection.Name}}</div> 
                         <div class="collection__container">
+                            {{- for nft in collection.Nfts}}
                             <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
+                                <div class="collection__nft__name">{{nft.Name}}</div>
                                 <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
+                                    <img src="/{{nft.ImagePath}}" class="collection__nft__image" alt="nft">
                                 </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
+                                <div class="collection__nft__price">{{nft.Price}} $</div>
                                 <button class="collection__nft__buy">BUY</button>
                             </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
-                            <div class="collection__nft">
-                                <div class="collection__nft__name">{Nft.Name}</div>
-                                <div class="collection__nft__photo">
-                                    <img src="" class="collection__nft__image" alt="nft">
-                                </div>
-                                <div class="collection__nft__price">{Nft.Price}</div>
-                                <button class="collection__nft__buy">BUY</button>
-                            </div>
+                            {{- end}}
                         </div>
                         <button class="collection__load">Load More</button>
                     </div>
+                    {{- end}}
 
                 </div>
             </section>

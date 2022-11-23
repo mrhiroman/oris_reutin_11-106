@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using HttpServer.Attributes;
+using HttpServer.Models;
+using Scriban;
 
 namespace HttpServer
 {
@@ -63,11 +65,10 @@ namespace HttpServer
 
                 if (buffer == null)
                 {
-                    response.Headers.Set("Content-Type", "text/plain");
+                    response.Headers.Set("Content-Type", "text/html");
                     response.StatusCode = (int) HttpStatusCode.NotFound;
 
-                    string err = "404 - Not Found";
-                    buffer = Encoding.UTF8.GetBytes(err);
+                    buffer = GetFile("/404.html");
                 }
                 else
                 {
@@ -118,6 +119,9 @@ namespace HttpServer
             // объект ответа
             HttpListenerResponse response = _httpContext.Response;
 
+            byte[] buffer;
+            Stream output;
+
             if (_httpContext.Request.Url.Segments.Length < 2) return false;
 
             string controllerName = _httpContext.Request.Url.Segments[1].Replace("/", "");
@@ -154,27 +158,22 @@ namespace HttpServer
             var controller = assembly.GetTypes().Where(t => Attribute.IsDefined(t, typeof(HttpController))).FirstOrDefault(c => c.Name.ToLower() == controllerName.ToLower());
 
             if (controller == null) return false;
-
-            var test = typeof(HttpController).Name;
-            foreach (var meth in controller.GetMethods())
-            {
-                Console.WriteLine(meth.Name);
-            }
             var method = controller.GetMethods()
                 .FirstOrDefault(t => t.GetCustomAttributes(true)
                     .Any(attr => (attr.GetType().Name == $"Http{_httpContext.Request.HttpMethod}") && 
-                                     ((t.GetParameters().Length - 1 == strParams.Length && request.HttpMethod == "POST") || (t.GetParameters().Length - 1 == strParams.Length - 1 && request.HttpMethod == "GET")) 
-                                     && (controllerInfo.Length == 0 || t.Name.ToLower() == controllerInfo[^1] || controllerInfo[^1] == controllerName)));
+                                     ((t.GetParameters().Length - 1 == strParams.Length && request.HttpMethod == "POST") || (t.GetParameters().Length - 1 == strParams.Length - 1 && request.HttpMethod == "GET") || t.GetParameters().Length == 1 && request.HttpMethod == "GET") 
+                                     && (controllerInfo.Length == 0 || (attr as HttpGET)?.MethodURI == controllerInfo[0] || t.Name.ToLower() == controllerInfo[^1] || controllerInfo[^1] == controllerName || request.HttpMethod == "POST")));
 
             if (method == null) return false;
             
             object? ret;
 
             if ((strParams.Length == method.GetParameters().Length - 1 && request.HttpMethod == "POST")  ||
-                (strParams.Length - 1 == method.GetParameters().Length - 1 && request.HttpMethod == "GET"))
+                (strParams.Length - 1 == method.GetParameters().Length - 1 && request.HttpMethod == "GET") || method.GetParameters().Length == 1)
             {
                 List<object> queryParams = new List<object>();
                 queryParams.Add(_httpContext);
+                if (request.HttpMethod == "GET") strParams = strParams.Skip(1).ToArray();
                 bool BadRequest = false;
                 try
                 {
@@ -237,8 +236,27 @@ namespace HttpServer
                     
                     var value = JsonSerializer.Serialize(new AuthCookie { Id = session});
                     var cookie = new Cookie("SessionId", value);
+                    cookie.Path = "/";
                     response.Cookies.Add(cookie);
+                    
+                    string text = File.ReadAllText("templates/profile/index.html");
 
+                    var tpl = Template.Parse(text);
+                    var userRepository = new UserRepository();
+                    var nftRepository = new NftRepository();
+                    var mdl = userRepository.GetById(Convert.ToInt32(userParams[1]));
+                    var nfts = nftRepository.GetAllForUser(mdl.Id);
+                    ret = tpl.Render(new {mdl.Login, mdl.Balance, mdl.Email, nfts}, m => m.Name);
+
+                    response.ContentType = "text/html";
+
+                    buffer = Encoding.ASCII.GetBytes(ret.ToString());
+                    response.ContentLength64 = buffer.Length;
+
+                    output = response.OutputStream;
+                    output.Write(buffer, 0, buffer.Length);
+
+                    output.Close();
                     return true;
                 }
             }
@@ -247,18 +265,20 @@ namespace HttpServer
             {
                 if (!ValidAuthCookie())
                 {
-                    ret = "";
+                    ret = "401 Unauthorized!";
                     response.StatusCode = (int) HttpStatusCode.Unauthorized;
                 }
                 
             }
-            
-            response.ContentType = "Application/json";
 
-            byte[] buffer = Encoding.ASCII.GetBytes(JsonSerializer.Serialize(ret));
+            response.ContentType = "Application/json";
+            
+            if(ret != null && ret.ToString().StartsWith("<!DOCTYPE html>")) response.ContentType = "text/html";
+
+            buffer = response.ContentType == "Application/json" ? Encoding.ASCII.GetBytes(JsonSerializer.Serialize(ret)) : Encoding.ASCII.GetBytes(ret.ToString());
             response.ContentLength64 = buffer.Length;
 
-            Stream output = response.OutputStream;
+            output = response.OutputStream;
             output.Write(buffer, 0, buffer.Length);
 
             output.Close();
