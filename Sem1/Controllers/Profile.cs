@@ -14,7 +14,7 @@ namespace HttpServer.Controllers
         [HttpGET("")]
         public string RenderProfile(HttpListenerContext context)
         {
-            var sessionId = JsonSerializer.Deserialize<AuthCookie>(context.Request.Cookies["SessionId"].Value).Id;
+            var sessionId = context.Request.Cookies["SessionId"] != null ? JsonSerializer.Deserialize<AuthCookie>(context.Request.Cookies["SessionId"]?.Value).Id : null;
             if (sessionId != null)
             {
                 var status = SessionManager.ValidateSession(sessionId);

@@ -41,7 +41,7 @@ namespace HttpServer
         public string Insert(User entity)
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            if (db.Insert(entity) != 0) return "Success!";
+            if (db.Insert(entity) != 0) return "Redirect: login_page";
             return "Error! Account or email already exists!";
         }
 

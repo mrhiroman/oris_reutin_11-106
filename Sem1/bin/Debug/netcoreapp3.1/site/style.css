@@ -613,10 +613,20 @@ body {
 
  .login__input {
     text-align: center;
+    font-family: 'Outfit',sans-serif;
+    color: white;
     background: #347569;
     border: 2px solid #50b2a0;
     border-radius: 10px;
     padding: 4px;
+ }
+
+ #checkbox1 {
+    display: inline;
+ }
+
+ .checkbox__label {
+    display: inline;
  }
 
  .login__button {

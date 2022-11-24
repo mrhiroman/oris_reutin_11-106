@@ -27,7 +27,7 @@
                         <input class="login__input" type="text" required placeholder="Login" name="Login">
                         <input class="login__input" type="text" required placeholder="Email" name="Email">
                         <input class="login__input" type="password" required placeholder="Password" name="Password">
-                        <input class="login__input" type="password" required placeholder="Repeat">
+                        <input class="login__input" type="password" name="Password2" required placeholder="Repeat">
                         <button type="submit" class="login__button">Register</button>
                     </div>
                 </form>
@@ -36,7 +36,12 @@
                     <div class="login__panel__container">
                         <input class="login__input" type="text" name="Login" required placeholder="Login">
                         <input class="login__input" type="password" name="Password" required placeholder="Password">
-                        <button type="submit" class="login__button">Sign In</button>
+                        <div>
+                            <input type='hidden' value='0' name='Remember'>
+                            <input id="checkbox1" type='checkbox' name="Remember">
+                            <label class="checkbox__label" for="checkbox1">Remember me</label>
+                        </div>
+                        <button type="submit" onclick="if (document.getElementById('checkbox1').checked) localStorage.setItem()" class="login__button">Sign In</button>
                     </div>
                 </form>
             </section>

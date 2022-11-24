@@ -7,10 +7,10 @@ namespace HttpServer
     {
         static MemoryCache _cache = MemoryCache.Default;
         
-        public static string CreateSession(int accountId, string login)
+        public static string CreateSession(int accountId, string login, bool isLong)
         {
             var session = new Session(Guid.NewGuid(), accountId, login);
-            _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(10));
+            _cache.Set(session.Id.ToString(), session, isLong ? DateTimeOffset.Now.AddMinutes(10) : DateTimeOffset.Now.AddMonths(1));
             var s = _cache.Get(session.Id.ToString());
             Console.WriteLine(session.Id.ToString());
             return session.Id.ToString();
@@ -32,10 +32,10 @@ namespace HttpServer
             return (Session)session;
         }
 
-        public static string UpdateSession(string sessionId)
+        public static string UpdateSession(string sessionId, bool isLong)
         {
             var session = GetInformation(sessionId);
-            if(ValidateSession(sessionId)) _cache.Set(session.Id.ToString(), session, DateTimeOffset.Now.AddMinutes(10));
+            if(ValidateSession(sessionId)) _cache.Set(session.Id.ToString(), session, isLong ? DateTimeOffset.Now.AddMinutes(10) : DateTimeOffset.Now.AddMonths(1));;
             return sessionId.ToString();
         }
     }

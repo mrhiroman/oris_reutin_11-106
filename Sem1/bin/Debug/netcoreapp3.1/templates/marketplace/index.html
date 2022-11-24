@@ -27,7 +27,7 @@
                     <div class="collection">
                         <div class="collection__name">Buy From Users</div>
                         <div class="collection__container">
-                            {{ if sellNfts.сount() == 0 }}
+                            {{ if sellNfts.size == 0 }}
                                 <div>Empty!</div>
                             {{ end }}
                             {{- for nft in sellNfts}}
@@ -41,14 +41,13 @@
                             </div>
                             {{- end}}
                         </div>
-                        <button class="collection__load">Load More</button>
                     </div>
 
                     {{- for collection in Collections}}
                     <div class="collection">
                         <div class="collection__name">{{collection.Name}}</div> 
                         <div class="collection__container">
-                            {{ if collection.Nfts.count == null }}
+                            {{ if collection.Nfts.size == 0 }}
                                 <div>Empty!</div>
                             {{ end }}
                             {{- for nft in collection.Nfts}}
@@ -62,7 +61,6 @@
                             </div>
                             {{- end}}
                         </div>
-                        <button class="collection__load">Load More</button>
                     </div>
                     {{- end}}
 

@@ -31,8 +31,9 @@ namespace HttpServer.Controllers
         }
         
         [HttpPOST("add")]
-        public string AddUser(HttpListenerContext context, string login, string email, string pass)
+        public string AddUser(HttpListenerContext context, string login, string email, string pass, string pass2)
         {
+            if (pass == pass2) return "Redirect: login_page";
             string salt = HashManager.CreateSalt();
             string hashedPassword = HashManager.GetSHA256(salt + pass);
             return _repository.Insert(new User {Login = login, Email = email.Replace("%40","@"),
@@ -40,10 +41,11 @@ namespace HttpServer.Controllers
         }
 
         [HttpPOST("authorize")]
-        public string Authorize(HttpListenerContext context, string login, string pass)
+        public string Authorize(HttpListenerContext context, string login, string pass, string rememberMe)
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            
+            bool isLong = false;
+            if (rememberMe == "on") isLong = true;
             string saltQuery = $"SELECT * FROM Users WHERE Login='{login}'";
             var saltLst = db.ExecuteQuery<User>(saltQuery).ToList();
             string salt = saltLst.Count != 0 ? saltLst[0].Salt : null;
@@ -53,10 +55,10 @@ namespace HttpServer.Controllers
                 string query = $"SELECT * FROM Users WHERE Login='{login}' AND HashedPassword='{hashedPassword}'";
                 db = new DatabaseAccessUnit(_connectionString);
                 var list = db.ExecuteQuery<User>(query);
-                if (list.Count() != 0) return $"auth_cookie:{list.ToList()[0].Id}:{list.ToList()[0].Login}";
+                if (list.Count() != 0) return $"auth_cookie:{list.ToList()[0].Id}:{list.ToList()[0].Login}:{isLong}";
             }
             
-            return "Redirect: invalid_credentials"; //TODO add error message and redirect
+            return "Redirect: invalid_credentials"; //TODO add error message
         }
 
         [RequireAuth]

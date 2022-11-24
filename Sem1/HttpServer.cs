@@ -223,16 +223,16 @@ namespace HttpServer
                         var id = JsonSerializer.Deserialize<AuthCookie>(request.Cookies["SessionId"].Value).Id;
                         if (SessionManager.ValidateSession(id))
                         {
-                            session = SessionManager.UpdateSession(id);
+                            session = SessionManager.UpdateSession(id,Convert.ToBoolean(userParams[3]));
                         }
                         else
                         {
-                            session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2]);
+                            session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2], Convert.ToBoolean(userParams[3]));
                         }
                     }
                     else
                     {
-                        session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2]);
+                        session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2], Convert.ToBoolean(userParams[3]));
                     }
                     
                     var value = JsonSerializer.Serialize(new AuthCookie { Id = session});
