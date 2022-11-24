@@ -14,9 +14,9 @@
         <header class="header">
             <div class="header__logo" onclick="location.href = '/';">Cryptures</div>
             <nav class="header__nav">
-                <a href="/marketplace/index.html" class="header__nav__link">Market</a>
-                <a href="/login/index.html" class="header__nav__link">Profile</a>
-                <a href="/about/index.html" class="header__nav__link">About</a>
+                <a href="/marketplace/" class="header__nav__link">Market</a>
+                <a href="/profile/" class="header__nav__link">Profile</a>
+                <a href="/about/" class="header__nav__link">About</a>
             </nav>
         </header>
         <main>
@@ -27,6 +27,9 @@
                     <div class="collection">
                         <div class="collection__name">Buy From Users</div>
                         <div class="collection__container">
+                            {{ if sellNfts.сount() == 0 }}
+                                <div>Empty!</div>
+                            {{ end }}
                             {{- for nft in sellNfts}}
                             <div class="collection__nft">
                                 <div class="collection__nft__name">{{nft.Name}}</div>
@@ -34,7 +37,7 @@
                                     <img src="/{{nft.ImagePath}}" class="collection__nft__image" alt="nft">
                                 </div>
                                 <div class="collection__nft__price">{{nft.Price}} $</div>
-                                <button class="collection__nft__buy">BUY</button>
+                                <button class="collection__nft__buy" onclick="location.href = '/deals/buy/{{nft.DealId}}'">BUY</button>
                             </div>
                             {{- end}}
                         </div>
@@ -45,6 +48,9 @@
                     <div class="collection">
                         <div class="collection__name">{{collection.Name}}</div> 
                         <div class="collection__container">
+                            {{ if collection.Nfts.count == null }}
+                                <div>Empty!</div>
+                            {{ end }}
                             {{- for nft in collection.Nfts}}
                             <div class="collection__nft">
                                 <div class="collection__nft__name">{{nft.Name}}</div>
@@ -52,7 +58,7 @@
                                     <img src="/{{nft.ImagePath}}" class="collection__nft__image" alt="nft">
                                 </div>
                                 <div class="collection__nft__price">{{nft.Price}} $</div>
-                                <button class="collection__nft__buy">BUY</button>
+                                <button class="collection__nft__buy" onclick="location.href = '/deals/buy/{{nft.DealId}}'">BUY</button>
                             </div>
                             {{- end}}
                         </div>
@@ -65,18 +71,18 @@
         </main>
         <footer class="footer">
             <div class="footer__col">
-                <div class="footer__col__headline header__logo" onclick="location.href = '';">Cryptures</div>
+                <div class="footer__col__headline header__logo" onclick="location.href = '/';">Cryptures</div>
                 <div class="copyright">© 2022 h1rrka</div>
             </div>
             <div class="footer__col">
                 <div class="footer__col__headline">Site</div>
-                <div class="footer__col__tab" onclick="location.href = '';">Home</div>
-                <div class="footer__col__tab" onclick="location.href = 'about/index.html';">About</div>
-                <div class="footer__col__tab" onclick="location.href = 'login/index.html';">Profile</div>
+                <div class="footer__col__tab" onclick="location.href = '/';">Home</div>
+                <div class="footer__col__tab" onclick="location.href = '/about/';">About</div>
+                <div class="footer__col__tab" onclick="location.href = '/profile/';">Profile</div>
             </div>
             <div class="footer__col">
                 <div class="footer__col__headline">Market</div>
-                <div class="footer__col__tab onclick="location.href = 'marketplace/index.html';"">Browse NFTs</div>
+                <div class="footer__col__tab" onclick="location.href = '/marketplace/';">Browse NFTs</div>
                 <div class="footer__col__tab">Sell an NFT</div>
             </div>
         </footer>

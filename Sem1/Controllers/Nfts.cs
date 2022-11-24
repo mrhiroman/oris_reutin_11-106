@@ -35,13 +35,5 @@ namespace HttpServer.Controllers
             var isOwner = sessionId != null && SessionManager.ValidateSession(status.Id) && nft.OwnerId == SessionManager.GetInformation(status.Id).AccountId;
             return tpl.Render(new {Id= nft.Id, Name = nft.Name, ImagePath = nft.ImagePath, Owner = user.Login, IsOwner = isOwner}, m => m.Name);
         }
-
-        [RequireAuth]
-        [HttpPOST("add")]
-        public string AddNftToSellList(HttpListenerContext context, int id)
-        {
-            // if user has nft -> add to list -> else do nothing
-            return "";
-        }
     }
 }

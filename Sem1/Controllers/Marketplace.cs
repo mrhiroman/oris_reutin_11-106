@@ -26,7 +26,7 @@ namespace HttpServer.Controllers
             foreach (var deal in dealList)
             {
                 var nft = nftRepository.GetById(deal.NftId);
-                nftList.Add(new NftWithPrice {Id = nft.Id, Name = nft.Name, Price = deal.Cost,
+                nftList.Add(new NftWithPrice {Id = nft.Id, Name = nft.Name, Price = deal.Cost, DealId = deal.Id,
                     CollectionId = nft.CollectionId,ImagePath = nft.ImagePath, OwnerId = nft.OwnerId});
             }
             
@@ -40,7 +40,7 @@ namespace HttpServer.Controllers
                 foreach (var deal in deals)
                 {
                     var nft = nftRepository.GetById(deal.NftId);
-                    nfts.Add(new NftWithPrice {Id = nft.Id, Name = nft.Name, Price = deal.Cost,
+                    nfts.Add(new NftWithPrice {Id = nft.Id, Name = nft.Name, Price = deal.Cost, DealId = deal.Id,
                         CollectionId = nft.CollectionId,ImagePath = nft.ImagePath, OwnerId = nft.OwnerId});
                 }
                 
@@ -54,6 +54,7 @@ namespace HttpServer.Controllers
         public class NftWithPrice : Nft
         {
             public int Price { get; set; }
+            public int DealId { get; set; }
         }
 
         public class CollectionWithNftList : Collection

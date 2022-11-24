@@ -56,7 +56,7 @@ namespace HttpServer.Controllers
                 if (list.Count() != 0) return $"auth_cookie:{list.ToList()[0].Id}:{list.ToList()[0].Login}";
             }
             
-            return "Invalid Data"; //TODO add error message and redirect
+            return "Redirect: invalid_credentials"; //TODO add error message and redirect
         }
 
         [RequireAuth]

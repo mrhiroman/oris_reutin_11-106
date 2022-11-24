@@ -49,25 +49,40 @@ namespace HttpServer.Models.Repositories
             {
                 db = new DatabaseAccessUnit(_connectionString);
                 db.Insert(entity);
-                return "Success!";
+                return "Redirect: sell_success";
             }
             else
             {
-                return "Already on sale!";
+                return "Redirect: already_on_sale";
             }
            
+        }
+
+        public string SetToUser(Deal entity, User user)
+        {
+            var db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Users SET Balance=Balance-{entity.Cost} WHERE Id={user.Id}");
+            db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Users SET Balance=Balance+{entity.Cost} WHERE Id={entity.SellerId}");
+            db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Nfts SET OwnerId={user.Id} WHERE Id={entity.NftId}");
+            db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Nfts SET CollectionId=1 WHERE Id={entity.NftId}");
+            db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Deals SET Status='sold' WHERE Id={entity.Id}");
+            return "Success!";
         }
         
         public List<Deal> RetrieveSellList()
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId=2").ToList();
+            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId=2 AND Status='active'").ToList();
         }
 
         public List<Deal> RetrieveCollection(int collectionId)
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId={collectionId}").ToList();
+            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId={collectionId} AND Status='active'").ToList();
         }
     }
 }

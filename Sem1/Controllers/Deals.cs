@@ -39,7 +39,7 @@ namespace HttpServer.Controllers
             string sessionId = context.Request.Cookies["SessionId"]?.Value.Replace('.',',');;
             var status = JsonSerializer.Deserialize<AuthCookie>(sessionId);
             var isOwner = sessionId != null && SessionManager.ValidateSession(status.Id) && nft.OwnerId == SessionManager.GetInformation(status.Id).AccountId;
-            if (nft.CollectionId == null) return "Error!";
+            if (nft.CollectionId != 1) return "Redirect: not_owner";
             if (isOwner)
             {
                 return _repository.AddToSellList(new Deal
@@ -49,14 +49,33 @@ namespace HttpServer.Controllers
                 });
             }
 
-            return "Error! You are not the Owner";
+            return "Redirect: not_owner";
         }
 
         [RequireAuth]
         [HttpGET("buy")]
         public string Buy(HttpListenerContext context, int dealId)
         {
-            return "";
+            var deal = _repository.GetById(dealId);
+            string sessionId = context.Request.Cookies["SessionId"]?.Value.Replace('.',',');;
+            var status = JsonSerializer.Deserialize<AuthCookie>(sessionId);
+            var userId = SessionManager.ValidateSession(status.Id)
+                ? SessionManager.GetInformation(status.Id).AccountId
+                : -1;
+            var user = new UserRepository().GetById(userId);
+            if (user != null)
+            {
+                if (user.Balance >= deal.Cost)
+                {
+                    var result = _repository.SetToUser(deal, user);
+                    if (result == "Success!")
+                    {
+                        return "Redirect: bought";
+                    }
+                }
+                return "Redirect: nomoney";
+            }
+            return "Redirect: unauthorized";
         }
         
     }

@@ -24,7 +24,7 @@ namespace HttpServer
         {
             var db = new DatabaseAccessUnit(_connectionString);
             var acc = db.ExecuteQuery<User>($"SELECT * FROM Users WHERE Id={id}");
-            if (acc.ToList() != null)
+            if (acc.ToList().Count != 0)
             {
                 return acc.ToList()[0];
             }
@@ -41,8 +41,8 @@ namespace HttpServer
         public string Insert(User entity)
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            db.Insert(entity);
-            return "Success!";
+            if (db.Insert(entity) != 0) return "Success!";
+            return "Error! Account or email already exists!";
         }
 
         public string Delete(User entity)

@@ -200,12 +200,13 @@ namespace HttpServer
                 response.StatusCode = (int) HttpStatusCode.BadRequest;
             }
 
-            if (ret != null && ret.ToString() == "Steam_redirect")
+            if (ret != null && ret.ToString().Split(' ')[0] == "Redirect:")
             {
                 using (response)
                 {
                     response.StatusCode = (int) HttpStatusCode.Redirect;
-                    response.Headers.Set("Location","http://store.steampowered.com/"); 
+                    var location = GetLocation(ret.ToString().Split(' ')[1]);
+                    response.Headers.Set("Location",location); 
                 
                     return true;
                 }
@@ -313,6 +314,31 @@ namespace HttpServer
                     return "image/svg+xml";
             }
             return "text/plain";
+        }
+
+        private string GetLocation(string redirectData)
+        {
+            switch (redirectData)
+            {
+                case "invalid_credentials":
+                    return "/profile/";
+                case "not_owner":
+                    return "/not_owner.html";
+                case "already_on_sale":
+                    return "/profile/";
+                case "sell_success":
+                    return "/marketplace/";
+                case "nomoney":
+                    return "/profile/";
+                case "bought":
+                    return "/profile/";
+                case "unauthorized":
+                    return "/login/";
+                case "login_page":
+                    return "/login/";
+            }
+
+            return "/404.html";
         }
         
 

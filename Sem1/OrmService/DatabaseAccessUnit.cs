@@ -40,6 +40,15 @@ namespace MyORM
                 _command.CommandText = query;
                 _connection.Open();
                 affected = _command.ExecuteNonQuery();
+                try
+                {
+                    
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
+                
             }
             
             return affected;
