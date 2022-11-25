@@ -16,9 +16,7 @@ namespace HttpServer
 
     public class UserRepository : IRepository<User>
     {
-        string _connectionString =
-            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NftDB;Integrated Security=True";
-
+        private string _connectionString = StaticSetting.ConnectionString;
         
         public User GetById(int id)
         {
@@ -41,13 +39,51 @@ namespace HttpServer
         public string Insert(User entity)
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            if (db.Insert(entity) != 0) return "Redirect: login_page";
+            try
+            {
+                if (db.Insert(entity) != 0)
+                {
+                    db = new DatabaseAccessUnit(_connectionString);
+                    return "Success";
+                }
+            }
+            catch (Exception e)
+            {
+                return "Error! Account or email already exists!";
+            }
+            
             return "Error! Account or email already exists!";
         }
 
         public string Delete(User entity)
         {
             throw new NotImplementedException();
+        }
+
+        public Wallet GetWallet(int userId)
+        {
+            try
+            {
+                var db = new DatabaseAccessUnit(_connectionString);
+                var wallets = db.ExecuteQuery<Wallet>($"SELECT * FROM Wallets WHERE UserId={userId}");
+                return wallets.ToList().FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+           
+        }
+
+        public string UpdateWallets(int userId, string binance, string bybit, string bitcoin)
+        {
+            var db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Wallets SET Binance='{binance}' WHERE UserId={userId}");
+            db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Wallets SET Bybit='{bybit}' WHERE UserId={userId}");
+            db = new DatabaseAccessUnit(_connectionString);
+            db.ExecuteNonQuery($"UPDATE Wallets SET Bitcoin='{bitcoin}' WHERE UserId={userId}");
+            return "Success";
         }
     }
 }

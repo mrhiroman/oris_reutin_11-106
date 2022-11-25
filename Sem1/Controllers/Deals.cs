@@ -39,7 +39,7 @@ namespace HttpServer.Controllers
             string sessionId = context.Request.Cookies["SessionId"]?.Value.Replace('.',',');;
             var status = JsonSerializer.Deserialize<AuthCookie>(sessionId);
             var isOwner = sessionId != null && SessionManager.ValidateSession(status.Id) && nft.OwnerId == SessionManager.GetInformation(status.Id).AccountId;
-            if (nft.CollectionId != 1) return "Redirect: not_owner";
+            if (nft.CollectionId != 1) return "Redirect: already_on_sale";
             if (isOwner)
             {
                 return _repository.AddToSellList(new Deal

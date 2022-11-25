@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MyORM;
 
@@ -6,8 +7,7 @@ namespace HttpServer.Models.Repositories
 {
     public class DealRepository : IRepository<Deal>
     {
-        string _connectionString =
-            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NftDB;Integrated Security=True";
+        private string _connectionString = StaticSetting.ConnectionString;
         
         public Deal GetById(int id)
         {
@@ -73,16 +73,16 @@ namespace HttpServer.Models.Repositories
             return "Success!";
         }
         
-        public List<Deal> RetrieveSellList()
+        public List<Deal> RetrieveSellList(int from, int amount)
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId=2 AND Status='active'").ToList();
+            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId=2 AND Status='active'").Skip(from).Take(amount).ToList();
         }
 
-        public List<Deal> RetrieveCollection(int collectionId)
+        public List<Deal> RetrieveCollection(int collectionId, int from, int amount)
         {
             var db = new DatabaseAccessUnit(_connectionString);
-            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId={collectionId} AND Status='active'").ToList();
+            return db.ExecuteQuery<Deal>($"SELECT * FROM Deals WHERE CollectionId={collectionId} AND Status='active'").Skip(from).Take(amount).ToList();
         }
     }
 }

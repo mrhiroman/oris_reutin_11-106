@@ -21,19 +21,29 @@ namespace HttpServer.Controllers
                 if (status)
                 {
                     var userId = SessionManager.GetInformation(sessionId).AccountId;
-                    string text = File.ReadAllText("templates/profile/index.html");
+                    string text = File.ReadAllText(StaticSetting.TemplateFolder + "/profile/index.html");
 
                     var tpl = Template.Parse(text);
                     var userRepository = new UserRepository();
                     var nftRepository = new NftRepository();
                     var mdl = userRepository.GetById(userId);
                     var nfts = nftRepository.GetAllForUser(mdl.Id);
-                    return tpl.Render(new {mdl.Login, mdl.Balance, mdl.Email, nfts}, m => m.Name);
+                    var wallet = userRepository.GetWallet(userId);
+                    if (wallet == null)
+                    {
+                        wallet = new Wallet();
+                        wallet.Binance = "";
+                        wallet.Bitcoin = "";
+                        wallet.Bybit = "";
+                        wallet.UserId = userId;
+                    }
+                    return tpl.Render(new {mdl.Login, mdl.Balance, mdl.Email, nfts, wallet}, m => m.Name);
                 }
                
             }
 
             return "Redirect: login_page";
         }
+        
     }
 }

@@ -7,8 +7,7 @@ namespace HttpServer.Models.Repositories
 {
     public class CollectionRepository : IRepository<Collection>
     {
-        string _connectionString =
-            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NftDB;Integrated Security=True";
+        private string _connectionString = StaticSetting.ConnectionString;
         
         public Collection GetById(int id)
         {

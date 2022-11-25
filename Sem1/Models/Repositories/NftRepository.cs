@@ -6,8 +6,7 @@ namespace HttpServer.Models
 {
     public class NftRepository : IRepository<Nft>
     {
-        string _connectionString =
-            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NftDB;Integrated Security=True";
+        private string _connectionString = StaticSetting.ConnectionString;
         
         public Nft GetById(int id)
         {

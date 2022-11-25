@@ -29,7 +29,7 @@ namespace HttpServer.Controllers
         {
             var nft = _repository.GetById(id);
             var user = new UserRepository().GetById(nft.OwnerId);
-            var tpl = Template.Parse(File.ReadAllText("templates/nft/index.html"));
+            var tpl = Template.Parse(File.ReadAllText(StaticSetting.TemplateFolder + "/nft/index.html"));
             string sessionId = context.Request.Cookies["SessionId"]?.Value.Replace('.',',');;
             var status = JsonSerializer.Deserialize<AuthCookie>(sessionId);
             var isOwner = sessionId != null && SessionManager.ValidateSession(status.Id) && nft.OwnerId == SessionManager.GetInformation(status.Id).AccountId;

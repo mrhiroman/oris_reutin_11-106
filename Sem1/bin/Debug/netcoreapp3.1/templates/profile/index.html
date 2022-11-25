@@ -26,6 +26,7 @@
                     <div class="profile__details__text">Nickname: {{Login}}</div>
                     <div class="profile__details__text">Balance: {{Balance}} $</div>
                     <div class="profile__details__text">Email: {{Email}}</div>
+                    <button class="logout__button" onclick="location.href='/users/logout'">Sign Out</button>
                 </div>
                 <div class="profile__caption ">My NFTs</div>
                 <div class="profile__details nft-details">
@@ -45,14 +46,17 @@
                     {{- end}}
                 </div>
                 <div class="profile__caption ">My Wallets</div>
-                <div class="profile__details details-col">
-                    <div class="profile__details__text">Binance: {Binance}</div>
-                    <div class="profile__details__text">Coinbase: {Coinbase}</div>
-                    <div class="profile__details__text">Bitcoin: {Bitcoin}</div>
-                    <div class="profile__details__text">Bybit: {Bybit}</div>
-                    <div class="profile__details__text">Huobi: {Huobi}</div>
-                    <button class="wallets__button">Edit Wallets</button>
-                </div>
+                <form action="/users/updatewallets/" method="POST" class="profile__details details-col">
+                    <div class="profile__details__text">Binance:</div>
+                    <input style="font-size:20px;margin-top:5px" type="text" name="binance" class="login__input" value="{{wallet.Binance}}" required>
+                    <div class="profile__details__text">Bybit:</div>
+                    <input style="font-size:20px;margin-top:5px" type="text" name="bybit" class="login__input" value="{{wallet.Bybit}}" required>
+                    <div class="profile__details__text">Bitcoin:</div>
+                    <input style="font-size:20px;margin-top:5px" type="text" name="bitcoin" class="login__input" value="{{wallet.Bitcoin}}" required>
+                    <input type="hidden" value="0" name="Empty1">
+                    <input type="hidden" value="0" name="Empty2">
+                    <button type="submit" class="wallets__button">Edit Wallets</button>
+                </form>
             </section>
         </main>
         <footer class="footer">

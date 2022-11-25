@@ -14,7 +14,6 @@ namespace HttpServer
 {
     public class HttpServer : IDisposable
     {
-        private ServerSetting _setting;
         private readonly HttpListener _listener;
         private bool isRunning;
 
@@ -27,13 +26,17 @@ namespace HttpServer
         {
             if (!isRunning)
             {
-                _setting = JsonSerializer.Deserialize<ServerSetting>(File.ReadAllBytes("./settings.json"));
+                var setting = JsonSerializer.Deserialize<ServerSetting>(File.ReadAllBytes("./settings.json"));
+                StaticSetting.Port = setting.Port;
+                StaticSetting.Site = setting.Site;
+                StaticSetting.ConnectionString = setting.ConnectionString;
+                StaticSetting.TemplateFolder = setting.TemplateFolder;
                 _listener.Prefixes.Clear();
-                _listener.Prefixes.Add($"http://localhost:{_setting.Port}/");
+                _listener.Prefixes.Add($"http://localhost:{StaticSetting.Port}/");
                 Console.WriteLine("Идет запуск сервера...");
                 _listener.Start();
                 isRunning = true;
-                Console.WriteLine($"Сервер запущен на порту {_setting.Port}"); 
+                Console.WriteLine($"Сервер запущен на порту {StaticSetting.Port}"); 
                 Listening();
             }
             else
@@ -58,7 +61,7 @@ namespace HttpServer
 
             byte[] buffer;
 
-            if (Directory.Exists(_setting.Site))
+            if (Directory.Exists(StaticSetting.Site))
             {
                 string fileUrl = _context.Request.RawUrl.Replace("%20", " ");
                 buffer = GetFile(fileUrl);
@@ -77,11 +80,10 @@ namespace HttpServer
             }
             else
             {
-                response.Headers.Set("Content-Type", "text/plain");
+                response.Headers.Set("Content-Type", "text/html");
                 response.StatusCode = (int) HttpStatusCode.NotFound;
 
-                string err = $"404 - No Directory {_setting.Site}";
-                buffer = Encoding.UTF8.GetBytes(err);
+                buffer = GetFile("/404.html");
             }
 
             response.ContentLength64 = buffer.Length;
@@ -94,7 +96,7 @@ namespace HttpServer
         private byte[] GetFile(string url)
         {
             byte[] buffer = null;
-            var filePath = _setting.Site + url;
+            var filePath = StaticSetting.Site + url;
             if (Directory.Exists(filePath))
             {
                 filePath = filePath + "index.html";
@@ -217,47 +219,20 @@ namespace HttpServer
                 using (response)
                 {
                     var userParams = ret.ToString().Split(':');
-                    string session = "";
-                    if (request.Cookies["SessionId"] != null)
-                    {
-                        var id = JsonSerializer.Deserialize<AuthCookie>(request.Cookies["SessionId"].Value).Id;
-                        if (SessionManager.ValidateSession(id))
-                        {
-                            session = SessionManager.UpdateSession(id,Convert.ToBoolean(userParams[3]));
-                        }
-                        else
-                        {
-                            session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2], Convert.ToBoolean(userParams[3]));
-                        }
-                    }
-                    else
-                    {
-                        session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2], Convert.ToBoolean(userParams[3]));
-                    }
-                    
+                    string session = SessionManager.CreateSession(Convert.ToInt32(userParams[1]), userParams[2], Convert.ToBoolean(userParams[3]));
+
                     var value = JsonSerializer.Serialize(new AuthCookie { Id = session});
                     var cookie = new Cookie("SessionId", value);
                     cookie.Path = "/";
+                    cookie.Expires = Convert.ToBoolean(userParams[3])
+                        ? DateTime.Now.AddMonths(1)
+                        : DateTime.Now.AddMinutes(20);
                     response.Cookies.Add(cookie);
                     
-                    string text = File.ReadAllText("templates/profile/index.html");
+                    response.StatusCode = (int) HttpStatusCode.Redirect;
+                    var location = GetLocation("Redirect: success_login".Split(' ')[1]);
+                    response.Headers.Set("Location",location); 
 
-                    var tpl = Template.Parse(text);
-                    var userRepository = new UserRepository();
-                    var nftRepository = new NftRepository();
-                    var mdl = userRepository.GetById(Convert.ToInt32(userParams[1]));
-                    var nfts = nftRepository.GetAllForUser(mdl.Id);
-                    ret = tpl.Render(new {mdl.Login, mdl.Balance, mdl.Email, nfts}, m => m.Name);
-
-                    response.ContentType = "text/html";
-
-                    buffer = Encoding.ASCII.GetBytes(ret.ToString());
-                    response.ContentLength64 = buffer.Length;
-
-                    output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-
-                    output.Close();
                     return true;
                 }
             }
@@ -299,7 +274,7 @@ namespace HttpServer
         private string GetExtension(string url)
         {
             string ext = Path.GetExtension(url);
-            if (Directory.Exists(_setting.Site + url)) ext = ".html";
+            if (Directory.Exists(StaticSetting.Site + url)) ext = ".html";
             switch (ext)
             {
                 case ".html":
@@ -321,21 +296,27 @@ namespace HttpServer
             switch (redirectData)
             {
                 case "invalid_credentials":
-                    return "/profile/";
+                    return "/login/";
                 case "not_owner":
                     return "/not_owner.html";
                 case "already_on_sale":
-                    return "/profile/";
+                    return "/alreadyonsale.html";
                 case "sell_success":
                     return "/marketplace/";
                 case "nomoney":
-                    return "/profile/";
+                    return "/balanceerror.html";
                 case "bought":
                     return "/profile/";
                 case "unauthorized":
                     return "/login/";
                 case "login_page":
                     return "/login/";
+                case "success_login":
+                    return "/profile/";
+                case "invalid_data":
+                    return "/login/fail.html";
+                case "profile":
+                    return "/profile/";
             }
 
             return "/404.html";

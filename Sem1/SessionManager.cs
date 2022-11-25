@@ -38,5 +38,10 @@ namespace HttpServer
             if(ValidateSession(sessionId)) _cache.Set(session.Id.ToString(), session, isLong ? DateTimeOffset.Now.AddMinutes(10) : DateTimeOffset.Now.AddMonths(1));;
             return sessionId.ToString();
         }
+
+        public static void ExpireSession(Session session)
+        {
+            _cache.Remove(session.Id.ToString());
+        }
     }
 }

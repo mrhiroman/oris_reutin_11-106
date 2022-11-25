@@ -26,7 +26,7 @@
                     
                     <div class="collection">
                         <div class="collection__name">Buy From Users</div>
-                        <div class="collection__container">
+                        <div class="collection__container" id="container2">
                             {{ if sellNfts.size == 0 }}
                                 <div>Empty!</div>
                             {{ end }}
@@ -41,12 +41,14 @@
                             </div>
                             {{- end}}
                         </div>
+                        <input type="hidden" id="collection2" value="5">
+                        <button class="collection__load" onclick="loadObjects(2,5)">Load More</button>
                     </div>
 
                     {{- for collection in Collections}}
                     <div class="collection">
                         <div class="collection__name">{{collection.Name}}</div> 
-                        <div class="collection__container">
+                        <div class="collection__container" id="container{{collection.Id}}">
                             {{ if collection.Nfts.size == 0 }}
                                 <div>Empty!</div>
                             {{ end }}
@@ -61,6 +63,10 @@
                             </div>
                             {{- end}}
                         </div>
+                        <input type="hidden" id="collection{{collection.Id}}" value="5">
+                        {{ if collection.Nfts.size != 0 }}
+                        <button class="collection__load" onclick="loadObjects({{collection.Id}},5)">Load More</button>
+                        {{ end }}
                     </div>
                     {{- end}}
 
@@ -84,5 +90,32 @@
                 <div class="footer__col__tab">Sell an NFT</div>
             </div>
         </footer>
+        <script>
+            function loadObjects(col, amount){
+                let current = document.getElementById('collection' + col);
+                let currentUrl = '/marketplace/getitems/' + col + '/' + current.value + '/' + amount;
+                let parent = document.getElementById('container' + col);
+                
+                $.ajax({
+                    url: currentUrl,
+                    method: 'get',                      
+                    success: function(data){ 
+                        const parser = new DOMParser();
+                        const document = parser.parseFromString(data, "text/html");
+                        let items = document.body.children;
+                        
+                        if(data != '') {
+                            for (let t=0; t < items.length; t++ ) {
+                                let u = t;
+                                console.log(items[u]);
+                                parent.appendChild(items[u].cloneNode(true));
+                            }
+                            current.value = Number(current.value) + amount;
+                            console.log(current.value);
+                        }  
+                    }      
+                });
+            }
+        </script>
     </body>
 </html>
