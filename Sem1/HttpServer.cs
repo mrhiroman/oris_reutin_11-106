@@ -50,7 +50,15 @@ namespace HttpServer
             while (_listener.IsListening)
             {
                 var _context = await _listener.GetContextAsync();
-                if (!MethodHandler(_context)) FileHandler(_context);
+                try
+                {
+                    if (!MethodHandler(_context)) FileHandler(_context);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine($"Не удалось обработать запрос: {_context.Request.Url}. Сервер продолжит работу...");
+                    Listening();
+                }
             }
         }
 
@@ -317,6 +325,8 @@ namespace HttpServer
                     return "/login/fail.html";
                 case "profile":
                     return "/profile/";
+                case "invalid_price":
+                    return "/invalid_price.html";
             }
 
             return "/404.html";

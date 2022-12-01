@@ -1,0 +1,10 @@
+{{- for nft in sellNfts}}
+    <div class="collection__nft">
+        <div class="collection__nft__name">{{nft.Name}}</div>
+            <div class="collection__nft__photo">
+                <img src="/{{nft.ImagePath}}" class="collection__nft__image" alt="nft">
+            </div>
+        <div class="collection__nft__price">{{nft.Price}} $</div>
+        <button class="collection__nft__buy" onclick="location.href = '/deals/buy/{{nft.DealId}}'">BUY</button>
+    </div>
+{{- end}}

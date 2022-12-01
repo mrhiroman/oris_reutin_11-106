@@ -8,7 +8,6 @@ using System.Text.Json;
 using HttpServer.Attributes;
 using HttpServer.Models;
 using HttpServer.Models.Repositories;
-using MyORM;
 using Scriban;
 
 
@@ -35,6 +34,7 @@ namespace HttpServer.Controllers
         [HttpPOST("sell")]
         public string Sell(HttpListenerContext context, int nftId, int price)
         {
+            if (price <= 0) return "Redirect: invalid_price";
             var nft = new NftRepository().GetById(nftId);
             string sessionId = context.Request.Cookies["SessionId"]?.Value.Replace('.',',');;
             var status = JsonSerializer.Deserialize<AuthCookie>(sessionId);

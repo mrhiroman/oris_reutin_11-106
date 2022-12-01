@@ -12,13 +12,11 @@ namespace HttpServer
             var session = new Session(Guid.NewGuid(), accountId, login);
             _cache.Set(session.Id.ToString(), session, isLong ? DateTimeOffset.Now.AddMinutes(10) : DateTimeOffset.Now.AddMonths(1));
             var s = _cache.Get(session.Id.ToString());
-            Console.WriteLine(session.Id.ToString());
             return session.Id.ToString();
         }
 
         public static bool ValidateSession(string sessionId)
         {
-            Console.WriteLine(_cache.GetCount());
             var session = GetInformation(sessionId);
             if (session == null) return false;
             if (DateTime.Now - TimeSpan.FromMinutes(15) <= session.CreateDateTime) return true;
@@ -27,7 +25,6 @@ namespace HttpServer
 
         public static Session GetInformation(string sessionId)
         {
-            Console.WriteLine(sessionId);
             var session = _cache.Get(sessionId);
             return (Session)session;
         }

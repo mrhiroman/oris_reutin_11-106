@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cryptures</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/reset.css">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <div class="header__logo" onclick="location.href = '/';">Cryptures</div>
+            <nav class="header__nav">
+                <a href="/marketplace/" class="header__nav__link">Market</a>
+                <a href="/profile/" class="header__nav__link">Profile</a>
+                <a href="/about/" class="header__nav__link">About</a>
+            </nav>
+        </header>
+        <main>
+            <section class="login">
+                <form onsubmit="return checkRegisterForm();" class="login__panel" action="/users/add/" method="POST">
+                    <div class="login__panel__text">Join Us Now</div>
+                    <div class="login__panel__container">
+                        <input id="register_login" class="login__input" type="text" required placeholder="Login" name="Login" maxlength="20">
+                        <input id="register_email" class="login__input" type="text" required placeholder="Email" name="Email" maxlength="30">
+                        <input id="register_password" class="login__input" type="password" required placeholder="Password" name="Password" maxlength="20">
+                        <input id="register_repeat" class="login__input" type="password" name="Password2" required placeholder="Repeat" maxlength="20">
+                        <button type="submit" class="login__button">Register</button>
+                    </div>
+                </form>
+                <form onsubmit="return checkLoginForm();" class="login__panel" action="/users/authorize/" method="POST">
+                    <div class="login__panel__text">Login</div>
+                    <div class="login__panel__container">
+                        <input id="login_login" class="login__input" type="text" name="Login" required placeholder="Login" maxlength="20">
+                        <input id="login_password" class="login__input" type="password" name="Password" required placeholder="Password" maxlength="30">
+                        <div>
+                            <input id="fake" type='hidden' value='off' name='Remember'>
+                            <input id="checkbox1" type='checkbox' onclick="check()">
+                            <label class="checkbox__label" for="checkbox1">Remember me</label>
+                        </div>
+                        <button type="submit" class="login__button">Sign In</button>
+                    </div>
+                    <script>
+                        let checkbox = document.getElementById('checkbox1');
+                        let fakeCheckbox = document.getElementById('fake');
+                        function check(){
+                            if(checkbox.checked == true){
+                                fakeCheckbox.value = 'on';
+                            } else {
+                                fakeCheckbox.value = 'off';
+                            }
+                        }
+                    </script>
+                </form>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="footer__col">
+                <div class="footer__col__headline header__logo" onclick="location.href = '/';">Cryptures</div>
+                <div class="copyright">© 2022 h1rrka</div>
+            </div>
+            <div class="footer__col">
+                <div class="footer__col__headline">Site</div>
+                <div class="footer__col__tab" onclick="location.href = '/';">Home</div>
+                <div class="footer__col__tab" onclick="location.href = '/about/';">About</div>
+                <div class="footer__col__tab" onclick="location.href = '/profile/';">Profile</div>
+            </div>
+            <div class="footer__col">
+                <div class="footer__col__headline">Market</div>
+                <div class="footer__col__tab" onclick="location.href = '/marketplace/';">Browse NFTs</div>
+                <div class="footer__col__tab">Sell an NFT</div>
+            </div>
+        </footer>
+        <script>
+            function checkLoginForm(){
+                const loginField = document.getElementById("login_login");
+                const passwordField = document.getElementById("login_password");
+
+                console.log(loginField.value);
+                console.log(passwordField.value);
+
+                loginPattern = /^[a-zA-Z](.[a-zA-Z0-9_-]*)$/;
+                passwordPattern = /^([0-9a-zA-Z]{6,20})$/;
+
+                if(!loginPattern.test(loginField.value)){
+                    alert('Логин содержит недопустимые символы, или его длина не находится в промежутке от 6 до 20 символов!')
+                    return false;
+                }
+
+                if(!passwordPattern.test(passwordField.value)){
+                    alert('Пароль содержит недопустимые символы, или его длина не находится в промежутке от 6 до 20 символов!')
+                    return false;
+                }
+                return true;
+            }
+
+            function checkRegisterForm(){
+                const loginField = document.getElementById("register_login");
+                const emailField = document.getElementById("register_email");
+                const passwordField = document.getElementById("register_password");
+                const passwordField2 = document.getElementById("register_repeat");
+
+
+                loginPattern = /^[a-zA-Z](.[a-zA-Z0-9_-]*)$/;
+                passwordPattern = /^([0-9a-zA-Z]{6,20})$/;
+                emailPattern = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+
+                if(!loginPattern.test(loginField.value)){
+                    alert('Логин содержит недопустимые символы, или его длина не находится в промежутке от 6 до 20 символов!')
+                    return false;
+                }
+
+                if(!emailPattern.test(emailField.value)){
+                    alert('Email не является корректным!')
+                    return false;
+                }
+
+                if(!passwordPattern.test(passwordField.value)){
+                    alert('Пароль содержит недопустимые символы, или его длина не находится в промежутке от 6 до 20 символов!')
+                    return false;
+                }
+
+                if(!passwordPattern.test(passwordField2.value)){
+                    alert('Пароль содержит недопустимые символы, или его длина не находится в промежутке от 6 до 20 символов!')
+                    return false;
+                }
+
+                if(passwordField.value != passwordField2.value){
+                    alert('Пароли не совпадают!');
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+    </body>
+</html>

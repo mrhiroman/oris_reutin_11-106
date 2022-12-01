@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace MyORM
+namespace HttpServer
 {
     public class DatabaseAccessUnit
     {
@@ -117,7 +117,6 @@ namespace MyORM
                 {
                     AddParameter(p.Name, value);
                     query += "@" + p.Name + ",";
-                    Console.WriteLine(this._command.Parameters);
                 }
             });
             return ExecuteNonQuery(query[..^1] + ")");

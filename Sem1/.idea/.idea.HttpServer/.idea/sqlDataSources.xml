@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="8071b62d-3dc5-4b9b-93f5-c9975628d1e2" />
+          <option name="name" value="Microsoft SQL Server LocalDB (JetBrains) (DDL)" />
+          <option name="languageId" value="TSQL" />
+          <option name="urls">
+            <array>
+              <option value="file://$USER_HOME$/Documents/dump/Collections.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Deals.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Nfts.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Users.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Wallets.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Collections.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Deals.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Nfts.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Users.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Wallets.sql" />
+              <option value="file://$USER_HOME$/Documents/dump/Wallets.sql" />
+            </array>
+          </option>
+          <option name="outPath" value="C:\Users\sreut\Documents\dump" />
+          <option name="outLayout" value="File per object.groovy" />
+        </State>
+        <State>
+          <option name="id" value="7f70f97a-ed84-41aa-b590-381799c6d4cb" />
+          <option name="name" value="Microsoft SQL Server LocalDB (JetBrains) (DDL)" />
+          <option name="languageId" value="TSQL" />
+          <option name="urls">
+            <array />
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
