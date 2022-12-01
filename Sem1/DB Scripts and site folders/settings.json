@@ -1,0 +1,6 @@
+{
+  "Port": 4358,
+  "Site": "./site",
+  "TemplateFolder": "./templates",
+  "ConnectionString": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=NftDB;Integrated Security=True"
+}
