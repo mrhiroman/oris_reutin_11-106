@@ -1,0 +1,13 @@
+C:\Users\sreut\RiderProjects\HTMLEngine\obj\Debug\netcoreapp3.1\HTMLEngine.csprojAssemblyReference.cache
+C:\Users\sreut\RiderProjects\HTMLEngine\obj\Debug\netcoreapp3.1\HTMLEngine.AssemblyInfoInputs.cache
+C:\Users\sreut\RiderProjects\HTMLEngine\obj\Debug\netcoreapp3.1\HTMLEngine.AssemblyInfo.cs
+C:\Users\sreut\RiderProjects\HTMLEngine\obj\Debug\netcoreapp3.1\HTMLEngine.csproj.CoreCompileInputs.cache
+C:\Users\sreut\RiderProjects\HTMLEngine\bin\Debug\netcoreapp3.1\HTMLEngine.exe
+C:\Users\sreut\RiderProjects\HTMLEngine\bin\Debug\netcoreapp3.1\HTMLEngine.deps.json
+C:\Users\sreut\RiderProjects\HTMLEngine\bin\Debug\netcoreapp3.1\HTMLEngine.runtimeconfig.json
+C:\Users\sreut\RiderProjects\HTMLEngine\bin\Debug\netcoreapp3.1\HTMLEngine.runtimeconfig.dev.json
+C:\Users\sreut\RiderProjects\HTMLEngine\bin\Debug\netcoreapp3.1\HTMLEngine.dll
+C:\Users\sreut\RiderProjects\HTMLEngine\bin\Debug\netcoreapp3.1\HTMLEngine.pdb
+C:\Users\sreut\RiderProjects\HTMLEngine\obj\Debug\netcoreapp3.1\HTMLEngine.dll
+C:\Users\sreut\RiderProjects\HTMLEngine\obj\Debug\netcoreapp3.1\HTMLEngine.pdb
+C:\Users\sreut\RiderProjects\HTMLEngine\obj\Debug\netcoreapp3.1\HTMLEngine.genruntimeconfig.cache

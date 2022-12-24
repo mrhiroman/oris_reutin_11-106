@@ -1,0 +1,18 @@
+<DOCTYPE !html>
+    <html>
+        <head>
+        </head>
+        <body>
+            <h1>Профессор</h1>
+            <h2>Фамилия: {{FirstName}}</h2>
+            <h2>Имя: {{LastName}}</h2>
+            <h2>Отчество: {{MiddleName}}</h2>
+            <h2>Дисциплина: {{Discipline}}</h2>
+            <h2>Группа: {{Group.Code}}</h2>
+            <br>
+            <h2>Студенты: </h2>
+            <br>
+            {{foreach Student Group.Students (<div>Студ. билет: {Document}      Фамилия: {FirstName}       Имя: {LastName}       Отчество: {MiddleName}</div><br>)}}
+            <h2>{{if Group.Students.Length > 15 (Группа переполнена!) ({{if Group.Students.Length > 10 (Группа полна) (Недобор в группе)}})}}</h2>
+        </body>
+    </html>

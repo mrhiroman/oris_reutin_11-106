@@ -954,7 +954,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sreut\\.nuget\\packages\\": {}
+    "C:\\Users\\sreut\\.nuget\\packages\\": {},
+    "D:\\Microsoft\\VS\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
@@ -965,17 +966,25 @@
       "packagesPath": "C:\\Users\\sreut\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\sreut\\Desktop\\homework\\oris_reutin_11-106\\Sem1\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\Microsoft\\VS\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\sreut\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\sreut\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -987,6 +996,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Scriban": {
             "target": "Package",
@@ -1007,16 +1017,23 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.31, 3.1.31]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.411\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

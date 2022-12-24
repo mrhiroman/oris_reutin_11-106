@@ -47,7 +47,6 @@ C:\Users\sreut\Desktop\homework\oris_reutin_11-106\week7\bin\Debug\netcoreapp3.1
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\week7\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.AccessControl.dll
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\week7\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\week7\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
-C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.csprojAssemblyReference.cache
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.AssemblyInfoInputs.cache
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.AssemblyInfo.cs
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.csproj.CoreCompileInputs.cache
@@ -77,3 +76,5 @@ C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.dll
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.pdb
 C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.genruntimeconfig.cache
+C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.csproj.AssemblyReference.cache
+C:\Users\sreut\Desktop\homework\oris_reutin_11-106\Sem1\obj\Debug\netcoreapp3.1\HttpServer.GeneratedMSBuildEditorConfig.editorconfig
